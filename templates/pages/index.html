@@ -16,26 +16,26 @@
                 <h1>Safe & Reliable <span>Logistic</span> Solutions!</h1>
               </div>
               <!--Hero form -->
-              <form action="#" method="GET" class="tracking-wrapper" aria-label="Package tracking form">
-              <div class="tracking-input-container">
-                <input 
-                  type="text" 
-                  id="tracking_number_new" 
-                  name="tracking_number" 
-                  class="tracking-input"
-                  placeholder="Enter Your Tracking ID" 
-                  required 
-                  aria-required="true"
-                  aria-label="Tracking number input"
-                  autocomplete="off"
-                >
-              </div>
-    <div class="tracking-button-container">
-      <button type="submit" class="tracking-button" aria-label="Submit tracking form">
-        Track &amp; Trace
-      </button>
-    </div>
-  </form>
+              <form action="#" method="GET" class="tracking-wrapper" aria-label="Package tracking form" id="trackingForm">
+  <div class="tracking-input-container">
+    <input 
+      type="text" 
+      id="tracking_number_new" 
+      name="tracking_number" 
+      class="tracking-input"
+      placeholder="Enter Your Tracking ID" 
+      required 
+      aria-required="true"
+      aria-label="Tracking number input"
+      autocomplete="off"
+    >
+  </div>
+  <div class="tracking-button-container">
+    <button type="submit" class="tracking-button" aria-label="Submit tracking form" id="trackingSubmitBtn">
+      Track &amp; Trace
+    </button>
+  </div>
+</form>
               <!-- Hero Pera -->
               <div class="hero-pera">
                 <p>For order status inquiry</p>
@@ -555,5 +555,55 @@
   </div>
   <!-- Blog Area End -->
 </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('trackingForm');
+    const submitBtn = document.getElementById('trackingSubmitBtn');
+
+    // SVG spinner for loading animation
+    const spinnerSVG = `
+      <svg 
+        xmlns="http://www.w3.org/2000/svg"
+        style="margin: auto; background: none; display: block;"
+        width="20px" 
+        height="20px" 
+        viewBox="0 0 100 100" 
+        preserveAspectRatio="xMidYMid"
+        aria-hidden="true"
+      >
+        <circle cx="50" cy="50" r="30" stroke="#fff" stroke-width="10" stroke-linecap="round" fill="none" />
+        <circle cx="50" cy="50" r="30" stroke="#ff6f00" stroke-width="10" stroke-linecap="round" fill="none" stroke-dasharray="141.37 141.37" stroke-dashoffset="141.37">
+          <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" keyTimes="0;1" values="0 50 50;360 50 50" />
+          <animate attributeName="stroke-dashoffset" values="141.37;0" dur="1s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+    `;
+
+    form.addEventListener('submit', (ev) => {
+      // Prevent multiple submissions in case this is just demonstration
+      if(submitBtn.disabled) {
+        ev.preventDefault();
+        return;
+      }
+
+      // Change button text to spinner
+      submitBtn.disabled = true;
+
+      // Save original button content for potential restoration
+      submitBtn.dataset.originalContent = submitBtn.innerHTML;
+      
+      submitBtn.innerHTML = spinnerSVG + '<span style="margin-left:8px; font-weight:600;">Loading...</span>';
+
+      // In a real app, submit usually continues or triggers AJAX.
+      // Here we simulate form submit delay (remove below if your form submits normally):
+      // ev.preventDefault(); // Uncomment if you want to test without form actually submitting
+      // setTimeout(() => {
+      //   submitBtn.disabled = false;
+      //   submitBtn.innerHTML = submitBtn.dataset.originalContent;
+      // }, 4000);
+    });
+  });
+</script>
 
 {% endblock content %}
