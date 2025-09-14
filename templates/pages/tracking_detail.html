@@ -17,14 +17,16 @@
   </section>
 
   <section class="track-card map-section" aria-label="Map showing current package location">
-    <h3>Map</h3>
-    {% comment %} Map container: hidden if no coordinate events {% endcomment %}
-    {% if events_json and events_json|length > 2 %}
-      <div id="tracking-map" tabindex="0" aria-label="Package location map"></div>
-    {% else %}
-      <div class="no-coords-placeholder" tabindex="0">No location coordinates available yet for this package.</div>
-    {% endif %}
-  </section>
+  <h3>Map</h3>
+  {% if events_json %}
+    <div id="tracking-map" tabindex="0" aria-label="Package location map"></div>
+  {% else %}
+    <div class="no-coords-placeholder" tabindex="0">
+      No location coordinates available yet for this package.
+    </div>
+  {% endif %}
+</section>
+
 
   <section class="track-card history-section" aria-label="Tracking history">
     <h3>Tracking History</h3>
@@ -59,10 +61,12 @@
     const first = events[0];
     const map = L.map('tracking-map').setView([first.lat, first.lng], 8);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '',
-    }).addTo(map);
+ L.tileLayer('https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png', {
+  attribution: '',
+  subdomains: 'abcd',
+  maxZoom: 19
+}).addTo(map);
+
 
     const latlngs = [];
     events.forEach(ev => {
