@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render 
-from main_app.forms import OrderForm
 from django.contrib import messages
 from main_app.models import Order
 import json
@@ -11,21 +10,14 @@ def indexPage(request):
     tracking_number = request.GET.get("tracking_number")
 
     if tracking_number:
-        return redirect("tracking_detail", tracking_number=tracking_number)
+        try:
+            order = Order.objects.get(tracking_number=tracking_number)
+            return redirect("tracking_detail", tracking_number=order.tracking_number)
+        except Order.DoesNotExist:
+            messages.error(request, "❌ Invalid Tracking Code. Please try again.")
+            return redirect("home")  # make sure 'index' is the name of your home URL
 
     return render(request, "pages/index.html")
-
-
-def create_order(request):
-    if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Package Order Created Successfully")
-            return redirect('detail_form')
-    else:
-        form = OrderForm()
-    return render(request, 'pages/detail_form.html', {'form': form})
 
 
 def tracking_detail(request, tracking_number):

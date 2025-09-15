@@ -16,26 +16,62 @@
                 <h1>Safe & Reliable <span>Logistic</span> Solutions!</h1>
               </div>
               <!--Hero form -->
-              <form action="#" method="GET" class="tracking-wrapper" aria-label="Package tracking form" id="trackingForm">
-  <div class="tracking-input-container">
-    <input 
-      type="text" 
-      id="tracking_number_new" 
-      name="tracking_number" 
-      class="tracking-input"
-      placeholder="Enter Your Tracking ID" 
-      required 
-      aria-required="true"
-      aria-label="Tracking number input"
-      autocomplete="off"
-    >
-  </div>
-  <div class="tracking-button-container">
-    <button type="submit" class="tracking-button" aria-label="Submit tracking form" id="trackingSubmitBtn">
-      Track &amp; Trace
-    </button>
-  </div>
-</form>
+              {% if messages %}
+              <div style="margin: 15px 0">
+                {% for message in messages %}
+                <div
+                  style="
+        padding: 12px 20px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: bold;
+        {% if message.tags == 'error' %}
+          background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5;
+        {% elif message.tags == 'success' %}
+          background-color: #dcfce7; color: #166534; border: 1px solid #86efac;
+        {% else %}
+          background-color: #e0f2fe; color: #075985; border: 1px solid #7dd3fc;
+        {% endif %}
+      "
+                >
+                  {{ message }}
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <form
+                action="#"
+                method="GET"
+                class="tracking-wrapper"
+                aria-label="Package tracking form"
+                id="trackingForm"
+              >
+                <div class="tracking-input-container">
+                  <input
+                    type="text"
+                    id="tracking_number_new"
+                    name="tracking_number"
+                    class="tracking-input"
+                    placeholder="Enter Your Tracking ID"
+                    required
+                    aria-required="true"
+                    aria-label="Tracking number input"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="tracking-button-container">
+                  <button
+                    type="submit"
+                    class="tracking-button"
+                    aria-label="Submit tracking form"
+                    id="trackingSubmitBtn"
+                  >
+                    Track &amp; Trace
+                  </button>
+                </div>
+              </form>
               <!-- Hero Pera -->
               <div class="hero-pera">
                 <p>For order status inquiry</p>
@@ -557,9 +593,9 @@
 </main>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('trackingForm');
-    const submitBtn = document.getElementById('trackingSubmitBtn');
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("trackingForm");
+    const submitBtn = document.getElementById("trackingSubmitBtn");
 
     // SVG spinner for loading animation
     const spinnerSVG = `
@@ -580,9 +616,9 @@
       </svg>
     `;
 
-    form.addEventListener('submit', (ev) => {
+    form.addEventListener("submit", (ev) => {
       // Prevent multiple submissions in case this is just demonstration
-      if(submitBtn.disabled) {
+      if (submitBtn.disabled) {
         ev.preventDefault();
         return;
       }
@@ -592,8 +628,10 @@
 
       // Save original button content for potential restoration
       submitBtn.dataset.originalContent = submitBtn.innerHTML;
-      
-      submitBtn.innerHTML = spinnerSVG + '<span style="margin-left:8px; font-weight:600;">Loading...</span>';
+
+      submitBtn.innerHTML =
+        spinnerSVG +
+        '<span style="margin-left:8px; font-weight:600;">Loading...</span>';
 
       // In a real app, submit usually continues or triggers AJAX.
       // Here we simulate form submit delay (remove below if your form submits normally):

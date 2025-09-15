@@ -16,6 +16,7 @@ class Order(models.Model):
     tracking_number = models.CharField(max_length=12, unique=True, default=generate_tracking_number, editable=False)
     sender_name = models.CharField(max_length=100)
     receiver_name = models.CharField(max_length=100)
+    receiver_email = models.EmailField(max_length=200)
     pickup_address = models.CharField(max_length=255)
     delivery_address = models.CharField(max_length=255)
     goods_description = models.TextField()
@@ -28,10 +29,18 @@ class Order(models.Model):
         return f"{self.tracking_number} - {self.sender_name} to {self.receiver_name}"
 
 class TrackingEvent(models.Model):
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("in_transit", "In Transit"),
+        ("out_for_delivery", "Out for Delivery"),
+        ("delivered", "Delivered"),
+        ("failed_attempt", "Failed Attempt"),
+        ("returned", "Returned"),
+    ]
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="events")
     timestamp = models.DateTimeField(auto_now_add=True)
     location = models.CharField(max_length=255)
-    status = models.CharField(max_length=120)
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default="pending")
     note = models.TextField(blank=True)
     latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
