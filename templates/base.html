@@ -457,12 +457,19 @@
               <div class="row align-items-center">
                 <!-- Logo -->
                 <div class="col-xl-2 col-lg-2">
-                  <div class="logo">
-                    <a href="index.html"
-                      ><img
-                        src="{% static 'assets/img/logo/logo.png' %}"
-                        alt=""
-                    /></a>
+                  <div class="logo" style="display: flex; align-items: center;">
+                    <div>
+                      <a href="{% url 'home' %}"
+                        ><img
+                          src="{% static 'assets/img/logo/logo.png' %}"
+                          alt=""
+                          height="50px"
+                          width="55px"
+                      />
+                    </div>
+                    <div>
+                      <p style="color: orange; font-size: larger; width: 300px;">Golden Xpress Logistics</p></a>
+                    </div>
                   </div>
                 </div>
                 <div class="col-xl-10 col-lg-10">
@@ -503,7 +510,8 @@
       <!-- Header End -->
     </header>
 
-    {% block content %} {% endblock content %}
+    {% block content %} 
+    {% endblock content %}
 
     <footer>
       <!--? Footer Start-->
