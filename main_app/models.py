@@ -17,7 +17,7 @@ class Order(models.Model):
     SERVICE_TYPE = [
         ('sea', 'Sea Delivery'),
         ('land', 'Land Delivery'),
-        ('Air', 'Land Delivery')
+        ('Air', 'Air Delivery')
     ]
     # SHIPMENT DETAILS
     quantity = models.IntegerField()

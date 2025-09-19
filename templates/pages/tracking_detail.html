@@ -4,17 +4,36 @@
 <div class="track-container" role="main">
   <h1 class="track-header" tabindex="0">Tracking: {{ order.tracking_number }}</h1>
 
-  <section class="track-card package-info" aria-label="Package information">
-    <h3>Package Info</h3>
-    <p><strong>Sender:</strong> {{ order.sender_name }}</p>
-    <p><strong>Receiver:</strong> {{ order.receiver_name }}</p>
-    <p><strong>Pickup:</strong> {{ order.pickup_address }}</p>
-    <p><strong>Delivery:</strong> {{ order.delivery_address }}</p>
-    <p><strong>Goods:</strong> {{ order.goods_description }}</p>
+  <section class="tracking-container">
+  <!-- Shipment Details -->
+  <div class="tracking-card">
+    <h3>📦 Shipment Details</h3>
+    <p><strong>Quantity:</strong> {{ order.quantity }}</p>
     <p><strong>Weight:</strong> {{ order.weight }} kg</p>
-    <p><strong>Payment status:</strong> {{ order.payment_status }}</p>
-    <p><strong>Current location:</strong> {{ order.current_address|default:"Not updated yet" }}</p>
-  </section>
+    <p><strong>Service Type:</strong> {{ order.service_type }}</p>
+    <p><strong>Goods:</strong> {{ order.goods_description }}</p>
+    <p><strong>Payment Status:</strong> {{ order.payment_status }}</p>
+  </div>
+
+  <!-- Destination Details -->
+  <div class="tracking-card">
+    <h3>📍 Destination Details</h3>
+    <p><strong>Receiver:</strong> {{ order.receiver_name }}</p>
+    <p><strong>Email:</strong> {{ order.receiver_email }}</p>
+    <p><strong>Address:</strong> {{ order.receiver_address }}</p>
+    <p><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
+    <p><strong>Delivery Date:</strong> {{ order.date_of_delivery }}</p>
+  </div>
+
+  <!-- Origin -->
+  <div class="tracking-card">
+    <h3>🚚 Origin</h3>
+    <p><strong>Sender Name:</strong> {{ order.sender_name }}</p>
+    <p><strong>Pickup Address:</strong> {{ order.pickup_address }}</p>
+    <p><strong>Sender Address:</strong> {{ order.sender_address }}</p>
+    <p><strong>Created At:</strong> {{ order.created_at|date:"M d, Y H:i" }}</p>
+  </div>
+</section>
 
   <section class="track-card map-section" aria-label="Map showing current package location">
   <h3>Map</h3>
