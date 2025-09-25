@@ -33,6 +33,11 @@ SECRET_KEY = 'django-insecure-tef)363@+0^h11$$jo*o&9^eu6%9_b!p+=-7xxvm_pp#nw1agh
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://cservice-production.up.railway.app",
+]
+
+
 
 # Application definition
 
