@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     "https://cservice-production.up.railway.app",
+    "https://goldenxpresslogistics.website",
 ]
 
 
