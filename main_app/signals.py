@@ -5,6 +5,8 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from .models import Order, TrackingEvent
+from django.conf import settings
+
 
 @receiver(post_save, sender=Order)
 def notify_receiver_on_order(sender, instance, created, **kwargs):
@@ -22,7 +24,7 @@ def notify_receiver_on_order(sender, instance, created, **kwargs):
         email = EmailMultiAlternatives(
             subject=subject,
             body=text_content,
-            from_email="successsimeon484@gmail.com",  # update with your sender email
+            from_email= settings.DEFAULT_FROM_EMAIL,  # update with your sender email
             to=[instance.receiver_email],
         )
         email.attach_alternative(html_content, "text/html")
@@ -46,7 +48,7 @@ def notify_receiver_on_tracking_event(sender, instance, created, **kwargs):
         email = EmailMultiAlternatives(
             subject=subject,
             body=text_content,
-            from_email="successsimeon484@gmail.com",  # replace with your sender email
+            from_email= settings.DEFAULT_FROM_EMAIL,  # replace with your sender email
             to=[instance.order.receiver_email],      # get email from related Order
         )
         email.attach_alternative(html_content, "text/html")
