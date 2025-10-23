@@ -4,6 +4,25 @@
 <div class="track-container" role="main">
   <h1 class="track-header" tabindex="0">Tracking: {{ order.tracking_number }}</h1>
 
+
+  <section class="tracking-container-nav">
+  <!-- Shipment Details -->
+  <div class="">
+    <p><strong>📦 Expected Delivery Date :</strong> {{ order.date_of_delivery }}</p>
+  </div>
+
+  <!-- Destination Details -->
+  <div class="">
+    <p><strong>📍 Status :</strong> {{ order.service_type }}</p>
+  </div>
+
+  <!-- Origin -->
+  <div class="">
+    <p><strong>🚚 Date Shipped :</strong> {{ order.created_at|date:"M d, Y H:i" }}</p>
+  </div>
+</section>
+
+
   <section class="tracking-container">
   <!-- Shipment Details -->
   <div class="tracking-card">

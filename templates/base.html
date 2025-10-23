@@ -43,10 +43,10 @@
     }
 
     .message-wrapper {
-  max-width: 620px;
-  margin: 1.5rem auto 1.5rem auto;
-  padding: 0 15px;
-}
+      max-width: 620px;
+      margin: 1.5rem auto 1.5rem auto;
+      padding: 0 15px;
+    }
 
 .alert {
   background-color: #d4edda;
@@ -248,7 +248,7 @@
     }
     /* Container */
   .track-container {
-    max-width: 860px;
+    max-width: 1050px;
     margin: 2rem auto 4rem;
     padding: 0 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -291,6 +291,20 @@
   }
 
   /* Package Info Paragraphs */
+
+.tracking-container-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1000px;
+  background: #f8fbff;
+  padding: 10px;
+  border: 1px solid #d0e3ff;
+  border-radius: 12px;
+}
+
+
   .tracking-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -511,9 +525,7 @@
                           <li><a href="{% url 'home' %}">Home</a></li>
                           <li><a href="#about">About</a></li>
                           <li><a href="#services">Services</a></li>
-                          <li>
-                            <a href="#blog">Blog</a>
-                          </li>
+                          <li><a href="#blog">Blog</a></li>
                           <li><a href="#contact">Contact</a></li>
                         </ul>
                       </nav>
